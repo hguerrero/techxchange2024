@@ -1,0 +1,101 @@
+openapi: 3.0.1
+info:
+  title: Pastry API
+  version: 1.0.0
+  description: This is a sample Pastry API that allows users to retrieve, create, update and delete pastry items.
+  contact:
+    email: something
+servers:
+- url: http://localhost:8080
+  description: Mock Server
+paths:
+  /:
+    get:
+      summary: Retrieve all pastries
+      operationId: get_pastries
+      tags: [pastries]
+      responses:
+        '200':
+          description: A list of pastry items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pastry'
+    post:
+      summary: Create a new pastry
+      operationId: create_pastry
+      tags: [pastries]
+      requestBody:
+        description: The pastry to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pastry'
+      responses:
+        '201':
+          description: The newly created pastry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pastry'
+  /{pastry_id}:
+    parameters:
+    - name: pastry_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieve a single pastry
+      operationId: get_pastry_by_id
+      tags: [pastries]
+      responses:
+        '200':
+          description: The requested pastry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pastry'
+    put:
+      summary: Update an existing pastry
+      operationId: update_pastry
+      tags: [pastries]
+      requestBody:
+        description: The updated pastry data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pastry'
+      responses:
+        '200':
+          description: The updated pastry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pastry'
+    delete:
+      summary: Delete an existing pastry
+      operationId: delete_pastry
+      tags: [pastries]
+      responses:
+        '204':
+          description: The requested pastry has been deleted
+components:
+  schemas:
+    Pastry:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        ingredients:
+          type: array
+          items:
+            type: string
+        instructions:
+          type: string

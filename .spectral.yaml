@@ -1,0 +1,11 @@
+extends: ["spectral:oas", "spectral:asyncapi"]
+
+rules:
+  contact-email-domain:
+    given: $.info.contact
+    severity: error
+    then:
+      field: email
+      function: pattern
+      functionOptions:
+        match: "^[^@]*@redhat\\.com$"
