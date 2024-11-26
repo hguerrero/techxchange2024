@@ -16,7 +16,7 @@
 
 ### Comands
 
-##### Setup IDE
+#### Setup IDE
 
 1. Create working dir
 
@@ -69,7 +69,7 @@
 
 You can alternative follow this [blog post](https://developers.redhat.com/articles/2024/08/01/open-source-ai-coding-assistance-granite-models#set_up_the_ai_code_assistant_in_your_ide) on get started with the extension.
 
-##### Start with API Design
+#### Start with API Design
 
 1. Let's start with desing-first / contract-first aproach
 
@@ -107,11 +107,11 @@ You can alternative follow this [blog post](https://developers.redhat.com/articl
    add a one line description of this API to the info section description field
    ```
 
-9. Run spectral linting from the terminal
+13. Run spectral linting from the terminal
 
-   ```sh
-   spectral lint openapi/pastry-openapi.yaml
-   ```
+    ```sh
+    spectral lint openapi/pastry-openapi.yaml
+    ```
 
 10. Show the errors in the log
 
@@ -121,7 +121,7 @@ You can alternative follow this [blog post](https://developers.redhat.com/articl
     considering this openapi, add the description, operationId and tags fields for each one of the operations
     ```
 
-##### Spectral Rules
+#### Spectral Rules
 
 1. Create rules file `.spectral.yaml` or open the file if it already exists.
 
@@ -143,7 +143,7 @@ You can alternative follow this [blog post](https://developers.redhat.com/articl
 
    You should look at an output similar to the following one:
 
-   ```sh
+   ```text
      7:12    error  contact-email-domain   "something" must match the pattern "^[^@]*@redhat\\.com$"      info.contact.email
      7:12    error  oas3-schema            "email" property must match format "email".                    info.contact.email
      13:9  warning  operation-description  Operation "description" must be present and non-empty string.  paths./.get
@@ -151,7 +151,28 @@ You can alternative follow this [blog post](https://developers.redhat.com/articl
     ...
    ```
 
-   
+##### Quarkus Server
+
+1. Use the quarkus new app to generate a new stub from VS Code
+
+2. Open a new VS Code window with the generated code
+
+3. Select the openapi file and press `CMD + I` to enable the left side chat bar
+
+4. Ask the model to create the quarkus code
+
+   ```text
+   given the above openapi create a quarkus example to implement the retrievePastries operation using rest-reactive
+   ```
+
+5. Do some clean up to just show the pastries path
+
+6. Fix the imports by selecting the code and `CMD +I`
+
+   ```text
+   replace javax imports with the new jakartaee packages in the PastryResource and show the result file
+   ```
+
 
 ## Podman AI Playground
 
